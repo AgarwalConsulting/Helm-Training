@@ -22,6 +22,8 @@
 - How to deploy, upgrade and rollback Helm charts
 - How to create and host your own Helm charts in depth
 
+---
+
 ## Agenda
 
 ### Day 1
@@ -32,7 +34,7 @@
   - RBAC / ServiceAccounts
 
 - Need for Helm
-  - Helm v2 vs v3
+  <!-- - Helm v2 vs v3 -->
 
 - Helm CLI
   - Installing/Upgrading charts
@@ -83,8 +85,44 @@
 
 - Overview of helm plugins
 
+### Day 3 (4 hours)
+
+- Helm User Input Validation (Schema Validation)
+
+- What state variables helm provides ?
+  - Eg: State Variables during Rendering
+
+- Helm Hooks
+  - What hooks are available?
+  - Best practices for tasks that are generally performed inside hooks
+
+- Helm charts in practice
+  - What to look for during upgrades and rollbacks (And how to manage using helm hooks)?
+    - Limitations and alternatives
+  - Chart Design Patterns
+
 - Writing secure charts
   - RBAC/ServiceAccounts
   - Securing your helm repository
   - Container security
   - Validating your charts
+
+---
+
+## Machine Requirements
+
+- 8 GiB of RAM
+- 4-core i7 or higher
+
+## Software Requirements
+
+- Docker
+  - Docker for Mac or Windows (as required)
+- [Kind](https://kind.sigs.k8s.io/)
+- `kubectl`
+- Helm v3
+
+Alternatively, the students can use a VM during the training which will have the above tools installed. In order, to use the VM during the training they would require:
+
+- [VirtualBox](https://www.virtualbox.org/)
+- [Vagrant](https://www.vagrantup.com/)
