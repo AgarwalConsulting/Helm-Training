@@ -227,13 +227,15 @@ class: center, middle
 
 ## Install & Setup
 
-- Docker
+- [Docker](https://docs.docker.com/engine/install/)
 
-- Kind
+- [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/#installation)
 
-- `kubectl`
+- [`kubectl`](https://kubernetes.io/docs/tasks/tools/)
 
-- Helm
+- [Helm](https://helm.sh/docs/intro/install/)
+
+.content-credits[https://github.com/AgarwalConsulting/Helm-Training/blob/master/Setup.md]
 
 ---
 class: center, middle
