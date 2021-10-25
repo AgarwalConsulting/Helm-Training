@@ -321,24 +321,6 @@ class: center, middle
 ---
 class: center, middle
 
-Locations of client cache...
-
----
-
-```bash
-ls $HOME/.cache/helm # Linux
-ls $HOME/Library/Caches/helm # macOS
-```
-
-```cmd
-dir %TEMP%\helm # Windows
-```
-
-.content-credits[https://helm.sh/docs/helm/helm/]
-
----
-class: center, middle
-
 ## Working with Helm CLI
 
 ---
@@ -389,6 +371,21 @@ class: center, middle
 class: center, middle
 
 *Exercise*: Installing and upgrading charts using `helm` cli
+
+---
+
+Locations of client cache:
+
+```bash
+ls $HOME/.cache/helm # Linux
+ls $HOME/Library/Caches/helm # macOS
+```
+
+```cmd
+dir %TEMP%\helm # Windows
+```
+
+.content-credits[https://helm.sh/docs/helm/helm/]
 
 ---
 class: center, middle
