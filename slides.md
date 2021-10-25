@@ -356,6 +356,11 @@ class: center, middle
 ---
 class: center, middle
 
+*Hands-on*: Installing and upgrading charts using `helm` cli
+
+---
+class: center, middle
+
 A chart repository is an HTTP server that houses an `index.yaml` file and optionally some packaged charts.
 
 .content-credits[https://helm.sh/docs/topics/chart_repository/]
