@@ -310,6 +310,20 @@ Helm 2 vs Helm 3: `Tiller`
 ---
 class: center, middle
 
+![Security and Architecture](assets/images/security-audit.png)
+
+.content-credits[https://helm.sh/blog/helm-2nd-security-audit]
+
+---
+class: center, middle
+
+Locations of client cache...
+
+.content-credits[https://helm.sh/docs/helm/helm/]
+
+---
+class: center, middle
+
 ## Working with Helm CLI
 
 ---
