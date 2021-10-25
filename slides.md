@@ -607,6 +607,16 @@ class: center, middle
 ---
 class: center, middle
 
+### Publishing charts
+
+---
+class: center, middle
+
+*Exercise*: Versioning and hosting charts
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
