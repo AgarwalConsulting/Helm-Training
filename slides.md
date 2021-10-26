@@ -634,7 +634,7 @@ class: center, middle
 ---
 class: center, middle
 
-*Exercise*: Versioning and hosting charts
+*Exercise*: [Versioning and hosting charts](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/03-packaging-and-hosting.md)
 
 ---
 class: center, middle
@@ -1062,6 +1062,18 @@ class: center, middle
 class: center, middle
 
 A named template (sometimes called a partial or a subtemplate) is simply a template defined inside of a file, and given a name.
+
+---
+class: center, middle
+
+two ways to create them, and a few different ways to use them
+
+---
+class: center, middle
+
+##### Creation of named templates
+
+---
 
 ---
 class: center, middle
