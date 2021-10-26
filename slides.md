@@ -919,6 +919,13 @@ class: center, middle
 ---
 class: center, middle
 
+List of all functions
+
+.content-credits[https://helm.sh/docs/chart_template_guide/function_list/]
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
