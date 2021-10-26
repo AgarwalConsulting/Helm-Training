@@ -559,12 +559,23 @@ class: center, middle
 ---
 class: center, middle
 
+[Helm install/uninstall order](https://github.com/helm/helm/blob/v3.7.0/pkg/releaseutil/kind_sorter.go)
+
+.content-credits[]
+---
+class: center, middle
+
 ### Packaging and hosting our chart in a repository
 
 ---
 class: center, middle
 
 To package: `helm package`
+
+---
+class: center, middle
+
+### Versioning charts
 
 ---
 class: center, middle
@@ -610,12 +621,9 @@ class: center, middle
 ---
 class: center, middle
 
-### Versioning charts
-
----
-class: center, middle
-
 ### Publishing charts
+
+.content-credits[https://artifacthub.io/docs/topics/repositories/#verified-publisher]
 
 ---
 class: center, middle
