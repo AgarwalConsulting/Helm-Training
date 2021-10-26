@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sg
+  name: {{.Release.Name}}-sg
+spec:
+  replicas: {{.Values.replicaCount}}
+  selector:
+    matchLabels:
+      app: sg
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: sg
+    spec:
+      containers:
+      - image: "agarwalconsulting/spring-greeting:{{ .Values.imageTag }}"
+        name: spring-greeting
+        resources: {}
