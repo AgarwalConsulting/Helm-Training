@@ -926,6 +926,146 @@ List of all functions
 ---
 class: center, middle
 
+### Flow Control
+
+---
+class: center, middle
+
+#### `if/else`
+
+---
+
+```tpl
+{{ if PIPELINE }}
+  # Do something
+{{ else if OTHER PIPELINE }}
+  # Do something else
+{{ else }}
+  # Default case
+{{ end }}
+```
+
+---
+class: center, middle
+
+control structures can execute an entire pipeline, not just evaluate a value
+
+---
+
+A pipeline is evaluated as false if the value is:
+
+- a boolean `false`
+
+- a numeric `zero`
+
+- an `empty string`
+
+- a `nil` (empty or null)
+
+- an empty collection (`map`, `slice`, `tuple`, `dict`, `array`)
+
+---
+
+```tpl
+data:
+  myvalue: "Hello World"
+  drink: {{ .Values.favorite.drink | default "tea" | quote }}
+  food: {{ .Values.favorite.food | upper | quote }}
+  {{ if eq .Values.favorite.drink "coffee" }}mug: "true"{{ end }}
+```
+
+---
+class: center, middle
+
+What about whitespaces?
+
+---
+class: center, middle
+
+`{{` vs `{{-`
+
+---
+class: center, middle
+
+#### `with` for modifying scope
+
+---
+class: center, middle
+
+`.` is a reference to the current scope
+
+---
+class: center, middle
+
+How to access other objects within `with` scope?
+
+---
+class: center, middle
+
+`$` is mapped to the root scope
+
+---
+class: center, middle
+
+#### `range` for looping
+
+---
+class: center, middle
+
+programming languages have support for looping using for loops, foreach loops
+
+---
+class: center, middle
+
+### Variables
+
+---
+class: center, middle
+
+a variable is a named reference to another object
+
+---
+class: center, middle
+
+Variables are assigned with a special assignment operator: `:=`
+
+---
+class: center, middle
+
+```tpl
+{{- $relname := .Release.Name -}}
+```
+
+---
+class: center, middle
+
+range with variables
+
+```tpl
+toppings: |-
+  {{- range $index, $topping := .Values.pizzaToppings }}
+    {{ $index }}: {{ $topping }}
+  {{- end }}
+```
+
+---
+class: center, middle
+
+variables are scoped to the template or the block in which they are defined
+
+---
+class: center, middle
+
+#### Named templates
+
+---
+class: center, middle
+
+A named template (sometimes called a partial or a subtemplate) is simply a template defined inside of a file, and given a name.
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 

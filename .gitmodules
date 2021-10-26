@@ -4,3 +4,6 @@
 [submodule "examples/apps/rvstore"]
 	path = examples/apps/rvstore
 	url = https://github.com/AgarwalConsulting/rvstore.git
+[submodule "solutions/chart-repo"]
+	path = solutions/chart-repo
+	url = https://github.com/AgarwalConsulting/helm-chart-repo.git

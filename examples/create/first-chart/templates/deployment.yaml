@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Values.name}}-hello-deployment
+  name: {{.Release.Name}}-hello-deployment
 spec:
   replicas: 1
   selector:
@@ -9,8 +9,9 @@ spec:
       application: hello
 
   template:
-    labels:
-      application: hello
+    metadata:
+      labels:
+        application: hello
     spec:
       containers:
         - name: hello-go
