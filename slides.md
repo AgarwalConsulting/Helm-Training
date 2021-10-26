@@ -559,9 +559,10 @@ class: center, middle
 ---
 class: center, middle
 
-[Helm install/uninstall order](https://github.com/helm/helm/blob/v3.7.0/pkg/releaseutil/kind_sorter.go)
+Helm install/uninstall order
 
-.content-credits[]
+.content-credits[https://github.com/helm/helm/blob/v3.7.0/pkg/releaseutil/kind_sorter.go]
+
 ---
 class: center, middle
 
@@ -616,6 +617,11 @@ class: center, middle
 ---
 class: center, middle
 
+The preferred way of sharing chart is by uploading them to a chart repository.
+
+---
+class: center, middle
+
 *Demo*: Hosting Chart Repositories
 
 ---
@@ -629,6 +635,286 @@ class: center, middle
 class: center, middle
 
 *Exercise*: Versioning and hosting charts
+
+---
+class: center, middle
+
+![Development lifecycle](assets/images/lifecycle.png)
+
+.image-credits[https://github.com/cloudacademy/helm-repo]
+
+---
+class: center, middle
+
+## Advanced templating
+
+---
+class: center, middle
+
+### Built-in objects
+
+.content-credits[https://helm.sh/docs/chart_template_guide/builtin_objects/]
+
+---
+class: center, middle
+
+`.Value.name` & `.Release.Name`
+
+---
+class: center, middle
+
+The leading dot before `Release` & `Value` indicates that we start with the top-most namespace for this scope.
+
+---
+
+- `Release`: This object describes the release itself. It has several objects inside of it:
+
+  - `Release.Name`: The release name
+
+  - `Release.Namespace`: The namespace to be released into (if the manifest doesn’t override)
+
+  - `Release.IsUpgrade`: This is set to true if the current operation is an upgrade or rollback.
+
+  - `Release.IsInstall`: This is set to true if the current operation is an install.
+
+  - `Release.Revision`: The revision number for this release. On install, this is 1, and it is incremented with each upgrade and rollback.
+
+  - `Release.Service`: The service that is rendering the present template. On Helm, this is always Helm.
+
+---
+class: center, middle
+
+`Values` passed into the template from the `values.yaml` file and from *user-supplied files*
+
+---
+class: center, middle
+
+By default, `Values` is empty
+
+---
+class: center, middle
+
+If you need to delete a key from the default values, you may override the value of the key to be `null`.
+
+.content-credits[https://helm.sh/docs/chart_template_guide/values_files/]
+
+---
+
+Other objects:
+
+- `Chart`: The contents of the `Chart.yaml` file
+
+- `Files`: provides access to all non-special files in a chart
+
+- `Capabilities`: provides information about what capabilities the Kubernetes cluster supports
+
+- `Template`: current template that is being executed
+
+---
+
+- `Template`: Contains information about the current template that is being executed
+
+  - `Template.Name`: A namespaced file path to the current template (e.g. `mychart/templates/mytemplate.yaml`)
+
+  - `Template.BasePath`: The namespaced path to the templates directory of the current chart (e.g. `mychart/templates`).
+
+---
+
+- `Files`: This provides access to all non-special files in a chart. While you cannot use it to access templates, you can use it to access other files in the chart. See the section Accessing Files for more.
+
+  - `Files.Get` is a *function* for getting a file by name (`.Files.Get config.ini`)
+
+  - `Files.GetBytes`: is a *function* for getting the contents of a file as an array of bytes instead of as a string. This is useful for things like images.
+
+  - `Files.Glob`: is a *function* that returns a list of files whose names match the given shell glob pattern.
+
+  - `Files.Lines`: is a *function* that reads a file line-by-line. This is useful for iterating over each line in a file.
+
+  - `Files.AsSecrets`: is a *function* that returns the file bodies as Base 64 encoded strings.
+
+  - `Files.AsConfig`: is a *function* that returns file bodies as a YAML map.
+
+---
+
+- `Capabilities`: This provides information about what capabilities the Kubernetes cluster supports.
+
+  - `Capabilities.APIVersions` is a set of versions.
+
+  - `Capabilities.APIVersions.Has $version` indicates whether a version (e.g., batch/v1) or resource (e.g., apps/v1/Deployment) is available on the cluster.
+
+  - `Capabilities.KubeVersion` and `Capabilities.KubeVersion.Version` is the Kubernetes version.
+
+  - `Capabilities.KubeVersion.Major` is the Kubernetes major version.
+
+  - `Capabilities.KubeVersion.Minor` is the Kubernetes minor version.
+
+---
+
+- `Capabilities.HelmVersion` is the object containing the Helm Version details, it is the same output of helm version
+
+  - `Capabilities.HelmVersion.Version` is the current Helm version in semver format.
+
+  - `Capabilities.HelmVersion.GitCommit` is the Helm git sha1.
+
+  - `Capabilities.HelmVersion.GitTreeState` is the state of the Helm git tree.
+
+  - `Capabilities.HelmVersion.GoVersion` is the version of the Go compiler used.
+
+---
+class: center, middle
+
+The built-in values always begin with a capital letter.
+
+---
+class: center, middle
+
+you are free to *use a convention* that suits your team
+
+---
+class: center, middle
+
+*Convention*: use only initial lower case letters in order to distinguish local names from those built-in
+
+---
+class: center, middle
+
+### Template functions & pipelines
+
+.content-credits[https://helm.sh/docs/chart_template_guide/functions_and_pipelines/]
+
+---
+class: center, middle
+
+to transform the supplied data in a way that makes it more useable: *use functions*
+
+---
+class: center, middle
+
+Template functions follow the syntax: `functionName arg1 arg2...`
+
+---
+class: center, middle
+
+Helm has over 60 available functions
+
+---
+
+- Some defined by [Go template language](https://pkg.go.dev/text/template#hdr-Actions)
+
+- Most part of the [Sprig template library](https://masterminds.github.io/sprig/)
+
+---
+class: center, middle
+
+"Helm template language" is actually a combination of the Go template language, some extra functions, and a variety of wrappers to expose certain objects to the templates.
+
+---
+class: center, middle
+
+Many resources on Go templates may be helpful as you learn about templating.
+
+---
+class: center, middle
+
+**Pipelines** are a tool for chaining together a series of template commands to compactly express a series of transformations
+
+---
+class: center, middle
+
+```tpl
+{{ .Values.favorite.food | upper | quote }}
+```
+
+---
+class: center, middle
+
+#### `default` function
+
+---
+class: center, middle
+
+allows you to specify a default value inside of the template, in case the value is omitted
+
+---
+class: center, middle
+
+```tpl
+default DEFAULT_VALUE GIVEN_VALUE
+```
+
+---
+class: center, middle
+
+Eg:
+
+```tpl
+{{ .Values.favorite.drink | default "tea" | quote }}
+```
+
+---
+class: center, middle
+
+#### `lookup` function
+
+---
+class: center, middle
+
+used to *look up* resources in a running cluster
+
+---
+class: center, middle
+
+`lookup apiVersion, kind, namespace, name -> resource or resource list`
+
+---
+class: center, middle
+
+Both name and namespace are optional and can be passed as an empty string (`""`)
+
+---
+class: center, middle
+
+![Lookup Behavior](assets/images/lookup-behavior.png)
+
+---
+
+- When lookup returns an object, it will return a dictionary
+
+- This dictionary can be further navigated to extract specific values
+
+---
+class: center, middle
+
+returns the annotations present for the mynamespace object
+
+```tpl
+(lookup "v1" "Namespace" "" "mynamespace").metadata.annotations
+```
+
+---
+class: center, middle
+
+When `lookup` returns a list of objects, it is possible to access the object list via the `items` field.
+
+---
+class: center, middle
+
+```tpl
+{{ range $index, $service := (lookup "v1" "Service" "mynamespace" "").items }}
+    {{/* do something with each service */}}
+{{ end }}
+```
+
+---
+class: center, middle
+
+#### Operators are functions
+
+---
+
+- For templates, the operators `(eq, ne, lt, gt, and, or and so on)` are all implemented as functions.
+
+- In pipelines, operations can be grouped with parentheses `((`, and `))`.
 
 ---
 class: center, middle
