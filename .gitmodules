@@ -1,3 +1,6 @@
-[submodule "examples/rvstore"]
-	path = examples/rvstore
+[submodule "examples/apps/yaes-server"]
+	path = examples/apps/yaes-server
+	url = https://github.com/algogrit/yaes-server.git
+[submodule "examples/apps/rvstore"]
+	path = examples/apps/rvstore
 	url = https://github.com/AgarwalConsulting/rvstore.git
