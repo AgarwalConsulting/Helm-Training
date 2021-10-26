@@ -1075,6 +1075,94 @@ class: center, middle
 
 ---
 
+Convention:
+
+- Most files in `templates/` are treated as if they contain Kubernetes manifests
+
+- The `NOTES.txt` is one exception
+
+- But files whose name begins with an underscore (`_`) are assumed to not have a manifest inside.
+
+---
+class: center, middle
+
+These files are not rendered to Kubernetes object definitions, but are available everywhere within other chart templates for use.
+
+---
+class: center, middle
+
+`define` action allows us to create a named template inside of a template file
+
+---
+
+```tpl
+{{ define "MY.NAME" }}
+  # body of template here
+{{ end }}
+```
+
+---
+
+*Eg*:
+
+```tpl
+{{- define "mychart.labels" }}
+  labels:
+    generator: helm
+    date: {{ now | htmlDate }}
+{{- end }}
+```
+
+---
+class: center, middle
+
+##### Usage of named templates
+
+---
+
+```tpl
+{{- define "mychart.labels" }}
+  labels:
+    generator: helm
+    date: {{ now | htmlDate }}
+{{- end }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  {{- template "mychart.labels" }}
+data:
+  myvalue: "Hello World"
+  {{- range $key, $val := .Values.favorite }}
+  {{ $key }}: {{ $val | quote }}
+  {{- end }}
+```
+
+---
+class: center, middle
+
+When the template engine reads this file, it will store away the reference to mychart.labels until template `"mychart.labels"` is called.
+
+---
+class: center, middle
+
+Conventionally, Helm charts put these templates inside of a partials file, usually `_helpers.tpl`
+
+---
+class: center, middle
+
+Passing scope to template while rendering, using "."
+
+---
+class: center, middle
+
+Use `include` for proper indentation
+
+---
+class: center, middle
+
+It is considered preferable to use `include` over `template` in Helm templates simply so that the output formatting can be handled better for YAML documents.
+
 ---
 class: center, middle
 
