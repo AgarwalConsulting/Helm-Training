@@ -1414,7 +1414,7 @@ Deployment's `.spec.strategy` specifies the strategy used to replace old Pods by
 ---
 class: center, middle
 
-*RollingUpdate strategy*
+*RollingUpdate* strategy
 
 ![RollingUpdate](assets/images/rolling-update.png)
 
