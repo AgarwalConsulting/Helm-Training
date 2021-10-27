@@ -1173,6 +1173,218 @@ It is considered preferable to use `include` over `template` in Helm templates s
 ---
 class: center, middle
 
+## Advanced charts
+
+---
+class: center, middle
+
+### Accessing Files
+
+---
+class: center, middle
+
+extra files added in to your Helm chart, will be bundled
+
+---
+class: center, middle
+
+Charts must be *smaller than 1M* because of the storage limitations of Kubernetes objects
+
+---
+
+Some files **CANNOT** be accessed through the `.Files` object, usually for security reasons:
+
+- Files in `templates/`
+
+- Files excluded using `.helmignore`
+
+---
+class: center, middle
+
+Charts do not preserve `UNIX mode` information, so file-level permissions will have no impact on the availability of a file when it comes to the `.Files` object.
+
+---
+class: center, middle
+
+#### Path helpers
+
+---
+class: center, middle
+
+Helm imports many of the functions from Go's [path package](https://golang.org/pkg/path/) for your use
+
+---
+
+The imported functions are:
+
+- Base
+
+- Dir
+
+- Ext
+
+- IsAbs
+
+- Clean
+
+---
+class: center, middle
+
+#### Glob patterns
+
+---
+class: center, middle
+
+`Files.Glob(pattern string)`
+
+---
+class: center, middle
+
+```tpl
+{{ range $path, $_ :=  .Files.Glob  "**.yaml" }}
+  {{ $.Files.Get $path }}
+{{ end }}
+```
+
+---
+class: center, middle
+
+#### ConfigMap and Secrets utility functions
+
+---
+
+```tpl
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: conf
+data:
+{{ (.Files.Glob "foo/*").AsConfig | indent 2 }}
+```
+
+---
+
+```tpl
+apiVersion: v1
+kind: Secret
+metadata:
+  name: very-secret
+type: Opaque
+data:
+{{ (.Files.Glob "bar/*").AsSecrets | indent 2 }}
+```
+
+---
+class: center, middle
+
+#### Encoding
+
+---
+
+```tpl
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-secret
+type: Opaque
+data:
+  token: |-
+        {{ .Files.Get "config1.toml" | b64enc }}
+```
+
+---
+class: center, middle
+
+#### Line by line access
+
+---
+
+```tpl
+data:
+  some-file.txt: {{ range .Files.Lines "foo/bar.txt" }}
+    {{ . }}{{ end }}
+```
+
+---
+class: center, middle
+
+## Library Charts
+
+---
+class: center, middle
+
+## Subcharts
+
+---
+class: center, middle
+
+charts can have dependencies, called *subcharts*
+
+---
+class: center, middle
+
+they have their own values and templates
+
+---
+
+Before we dive into the code:
+
+- A subchart is considered "stand-alone", which means a subchart can never explicitly depend on its parent chart
+
+- For that reason, a subchart cannot access the values of its parent
+
+- A parent chart can override values for subcharts
+
+- Helm has a concept of *global values* that can be accessed by all charts
+
+---
+class: center, middle
+
+*Demo*: Creating a subchart by creating a chart under `charts/` directory
+
+---
+class: center, middle
+
+accessing values inside subcharts
+
+---
+class: center, middle
+
+### Global Chart Values
+
+---
+class: center, middle
+
+Defined using: `global:`
+
+---
+class: center, middle
+
+Globals are useful for passing information
+
+---
+class: center, middle
+
+### Sharing Templates with Subcharts
+
+---
+class: center, middle
+
+Parent charts and subcharts can share templates.
+
+---
+class: center, middle
+
+Any defined block in any chart is available to other charts.
+
+---
+class: center, middle
+
+*Exercise*: Write a chart with [optional configuration for Ingress](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/04-complex-chart-with-optionals.md)
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
