@@ -778,6 +778,13 @@ class: center, middle
 ---
 class: center, middle
 
+YAML refresher
+
+.content-credits[https://helm.sh/docs/chart_template_guide/yaml_techniques/]
+
+---
+class: center, middle
+
 ### Template functions & pipelines
 
 .content-credits[https://helm.sh/docs/chart_template_guide/functions_and_pipelines/]
