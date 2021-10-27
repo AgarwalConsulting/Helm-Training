@@ -1310,6 +1310,32 @@ class: center, middle
 
 ## Library Charts
 
+.content-credits[https://helm.sh/docs/topics/library_charts/]
+
+---
+class: center, middle
+
+To be able to use the common code, we need to add `mylibchart` as a dependency.
+
+---
+
+```bash
+cat Chart.yaml
+```
+
+```yaml
+# My common code in my library chart
+dependencies:
+- name: mylibchart
+  version: 0.1.0
+  repository: file://../mylibchart
+```
+
+---
+class: center, middle
+
+`helm dependency update`
+
 ---
 class: center, middle
 
