@@ -1385,6 +1385,110 @@ class: center, middle
 ---
 class: center, middle
 
+## Upgrading charts
+
+---
+class: center, middle
+
+### Deployment Strategies
+
+---
+class: center, middle
+
+Deployment's `.spec.strategy` specifies the strategy used to replace old Pods by new ones
+
+.content-credits[https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy]
+
+---
+
+- **Recreate**: terminate the old version and release the new one
+
+- **RollingUpdate** or *ramped*: release a new version on a rolling update fashion, one after the other
+
+- *blue/green*: release a new version alongside the old version then switch traffic
+
+- *canary*: release a new version to a subset of users, then proceed to a full rollout
+
+- *a/b testing*: release a new version to a subset of users in a precise way (HTTP headers, cookie, weight, etc.). A/B testing is really a technique for making business decisions based on statistics but we will briefly describe the process. This doesn’t come out of the box with Kubernetes, it implies extra work to setup a more advanced infrastructure (Istio, Linkerd, Traefik, custom nginx/haproxy, etc)
+
+---
+class: center, middle
+
+*RollingUpdate strategy*
+
+![RollingUpdate](assets/images/rolling-update.png)
+
+---
+
+- For `RollingUpdate`, you can adjust the behavior.
+
+  - `maxUnavailable` specifies how many pods can be unavailable at any time during rollout. You can specify absolute number or percentage. The default is 25%.
+
+  - `maxSurge` is how many pods can be created over the replicas count. Can be absolute or percentage. The default is 25%.
+
+  - `minReadySeconds` specifies a waiting period before a new Pod is considered ready. For a better solution, use Probes.
+
+---
+
+- Blue/green is not supported by K8S. But you can still implement it yourself manually or with some scripting.
+
+  - You can perform a blue/green deployment by using a label scheme with more than one set of labels.
+
+- You can also do canary deployments in the same way as blue/green, but by creating a small Deployment of the new code, using common labels in your Service so that the canary pods are mixed in with original pods.
+
+  - Once the code is vetted, then the canary Deployment can be expanded and the original Deployment reduced.
+
+---
+class: center, middle
+
+Choosing the right deployment procedure depends on the needs
+
+---
+class: center, middle
+
+### Managing multiple versions of the same chart
+
+---
+class: center, middle
+
+When a new version of a chart is released, or when you want to change the configuration of your release, you can use the `helm upgrade` command.
+
+---
+class: center, middle
+
+if something does not go as planned during a release, it is easy to roll back to a previous release using `helm rollback`
+
+---
+class: center, middle
+
+```bash
+helm rollback <release-name> <revision-number>
+```
+
+---
+
+- `helm upgrade`
+
+- `helm rollback`
+
+---
+
+Useful options:
+
+- `--timeout`: A Go duration value to wait for Kubernetes commands to complete. This defaults to 5m0s.
+
+- `--wait`: Waits until all Pods are in a ready state, PVCs are bound, Deployments have minimum (Desired minus maxUnavailable) Pods in ready state and Services have an IP address (and Ingress if a LoadBalancer) before marking the release as successful. It will wait for as long as the --timeout value. If timeout is reached, the release will be marked as FAILED. Note: In scenarios where Deployment has replicas set to 1 and maxUnavailable is not set to 0 as part of rolling update strategy, `--wait` will return as ready as it has satisfied the minimum Pod in ready condition.
+
+- `--no-hooks`: This skips running hooks for the command
+
+---
+class: center, middle
+
+*Hands-on*: Roll back the previously installed chart
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
