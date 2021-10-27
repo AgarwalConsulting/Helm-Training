@@ -8,16 +8,18 @@ data:
   # IsBetaSupported: {{.Capabilities.APIVersions.Has "apps/v1"}}
   k8sVersion: {{.Capabilities.KubeVersion}}
   k8sVersionVersion: {{.Capabilities.KubeVersion.Version}}
-  helmVersion: {{.Capabilities.HelmVersion.Version | quote}}
-  goTemplate: {{.Capabilities.HelmVersion.GoVersion | quote}}
-  # values: {{.Values | quote}}
+  helmVersion: {{ quote .Capabilities.HelmVersion.Version }}
+  goTemplate: {{ quote .Capabilities.HelmVersion.GoVersion }}
   # (or)
-  values: {{.Values | quote}}
-  # values: "{{.Values | quote}}" # doesn't work!
-  languages: {{.Values.languages | quote}}
-  favourite: {{.Values.favourite}}
-  class: {{.Values.class | quote}}
+  values: {{ quote .Values }}
+  languages: {{ quote .Values.languages }}
+  # favourite: {{default "Green" .Values.favourite }}
+  favourite: {{ .Values.languages | default (list "Spice" "Sugar") | first | default "Green" }}
+  class: {{quote .Values.class}}
   classCount: "{{.Values.count}}"
-  things: {{.Values.things | quote}}
-  portNumber: {{.Values.port|quote}}
+  things: {{ quote .Values.things }}
+  portNumber: {{.Values.port | quote}}
   someJSON: {{.Values.someJSON|quote }}
+  # configMaps: {{/* lookup "v1" "ConfigMap" "default" "" | quote */}}
+  configMapCount: {{ (lookup "v1" "ConfigMap" "default" "").items | len | quote }}
+  cmLabels: {{ ((lookup "v1" "ConfigMap" "default" "").items | first).metadata.labels | quote }}

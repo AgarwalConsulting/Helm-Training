@@ -1,14 +1,16 @@
-things:
+things: # Map -> dict
   words: bare words
   silver: "MacBook Pro"
   black: 'Mic'
 
-languages:
-  - &favoriteLanguage Go
+languages: # List of strings
+  - &favoriteLanguage Go # YAML anchors
   - Java
 
-favourite: *favoriteLanguage
+# string
+# favourite: *favoriteLanguage
 
+# string
 class: |-
   Rolando
     Sacramento
@@ -16,8 +18,8 @@ class: |-
   Manu
   Raghavender
 
-# count: !!str 20
-count: !!int "20"
+count: 20
+# count: !!int "20"
 
 port: 8000
 # port: !!int "8000"

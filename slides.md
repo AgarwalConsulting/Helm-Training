@@ -1063,6 +1063,11 @@ variables are scoped to the template or the block in which they are defined
 ---
 class: center, middle
 
+*Exercise*: [What would be the rendered templates?](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/05-what-would-be-the-generated-template.md)
+
+---
+class: center, middle
+
 #### Named templates
 
 ---
