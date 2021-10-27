@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Release.Name}}-demo-cm
+data:
+  some-key: some-value
+  files: {{.Files.Get "secret.key"}}
+  # IsBetaSupported: {{.Capabilities.APIVersions.Has "apps/v1"}}
+  k8sVersion: {{.Capabilities.KubeVersion}}
+  k8sVersionVersion: {{.Capabilities.KubeVersion.Version}}
+  helmVersion: {{.Capabilities.HelmVersion.Version | quote}}
+  goTemplate: {{.Capabilities.HelmVersion.GoVersion | quote}}
+  # values: {{.Values | quote}}
+  # (or)
+  values: {{.Values | quote}}
+  # values: "{{.Values | quote}}" # doesn't work!
+  languages: {{.Values.languages | quote}}
+  favourite: {{.Values.favourite}}
+  class: {{.Values.class | quote}}
+  classCount: "{{.Values.count}}"
+  things: {{.Values.things | quote}}
+  portNumber: {{.Values.port|quote}}
+  someJSON: {{.Values.someJSON|quote }}
