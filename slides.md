@@ -1489,6 +1489,73 @@ class: center, middle
 ---
 class: center, middle
 
+## Debugging
+
+---
+class: center, middle
+
+### Templates
+
+---
+
+There are a few commands that can help you debug:
+
+- `helm lint` is your go-to tool for verifying that your chart follows best practices
+
+- `helm install --dry-run --debug` or `helm template --debug`: We've seen this trick already. It's a great way to have the server render your templates, then return the resulting manifest file.
+
+- `helm get manifest`: This is a good way to see what templates are installed on the server.
+
+---
+class: center, middle
+
+### Installations
+
+---
+class: center, middle
+
+`helm status` - display the status of the named release
+
+---
+
+The status consists of:
+
+- last deployment time
+
+- k8s namespace in which the release lives
+
+- state of the release (can be: `unknown`, `deployed`, `uninstalled`, `superseded`, `failed`, `uninstalling`, `pending-install`, `pending-upgrade` or `pending-rollback`)
+
+- revision of the release
+
+- description of the release (can be completion message or error message, need to enable `--show-desc`)
+
+- list of resources that this release consists of, sorted by kind
+
+- details on last test suite run, if applicable
+
+- additional notes provided by the chart
+
+---
+class: center, middle
+
+```bash
+helm  upgrade --install chart my-chart --debug
+```
+
+---
+class: center, middle
+
+displays all the resources which are created one by one and also related errors which occurred during installation
+
+---
+class: center, middle
+
+## Testing charts
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
