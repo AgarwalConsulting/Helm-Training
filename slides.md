@@ -1588,7 +1588,7 @@ There are a few commands that can help you debug:
 ---
 class: center, middle
 
-### Installations
+### Installations / Upgrades
 
 ---
 class: center, middle
@@ -1620,6 +1620,11 @@ The status consists of:
 ---
 class: center, middle
 
+`helm history`
+
+---
+class: center, middle
+
 ```bash
 helm  upgrade --install chart my-chart --debug
 ```
@@ -1628,6 +1633,11 @@ helm  upgrade --install chart my-chart --debug
 class: center, middle
 
 displays all the resources which are created one by one and also related errors which occurred during installation
+
+---
+class: center, middle
+
+`--wait` & `--atomic`
 
 ---
 class: center, middle
@@ -1749,6 +1759,44 @@ The Helm plugin model is partially modeled on Git's plugin model.
 class: center, middle
 
 Helm provides the user experience and top level processing logic, while the plugins do the "detail work" of performing a desired action.
+
+---
+class: center, middle
+
+### Plugin Management
+
+`helm plugin`
+
+---
+class: center, middle
+
+#### Installing a plugin
+
+```bash
+helm plugin install https://github.com/jkroepke/helm-secrets
+```
+
+---
+class: center, middle
+
+[Other useful plugins](https://github.com/search?q=topic%3Ahelm-plugin&type=Repositories)
+
+.content-credits[https://github.com/cdwv/awesome-helm#plugins]
+
+---
+class: center, middle
+
+### Using [helm-unittest](https://github.com/quintush/helm-unittest)
+
+---
+class: center, middle
+
+BDD styled unit test framework for Kubernetes Helm charts as a Helm plugin.
+
+---
+class: center, middle
+
+*Demo*: Using helm-unittest to define test cases
 
 ---
 class: center, middle
