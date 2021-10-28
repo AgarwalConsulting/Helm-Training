@@ -1615,6 +1615,8 @@ The status consists of:
 
 - additional notes provided by the chart
 
+.content-credits[https://github.com/helm/helm/blob/main/pkg/action/list.go#L35]
+
 ---
 class: center, middle
 
