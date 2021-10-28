@@ -1801,6 +1801,18 @@ class: center, middle
 ---
 class: center, middle
 
+### [Building Plugins](https://helm.sh/docs/topics/plugins/#building-plugins)
+
+---
+class: center, middle
+
+## Helm Hooks
+
+.content-credits[https://helm.sh/docs/topics/charts_hooks/]
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
