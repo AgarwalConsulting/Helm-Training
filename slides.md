@@ -1699,6 +1699,58 @@ You may have to wait for all pods to become active; if you test immediately afte
 ---
 class: center, middle
 
+*Exercise*: [Write a simple test pod for `spring-greeting`](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/06-simple-test.md)
+
+---
+class: center, middle
+
+## Helm Plugins
+
+.content-credits[https://helm.sh/docs/topics/plugins/]
+
+---
+class: center, middle
+
+A Helm plugin is a tool that can be accessed through the helm CLI, but which is not part of the built-in Helm codebase.
+
+---
+class: center, middle
+
+Helm plugins are add-on tools that integrate seamlessly with Helm.
+
+---
+class: center, middle
+
+They provide a way to extend the core feature set of Helm, but without requiring every new feature to be written in Go and added to the core tool.
+
+---
+
+Helm plugins have the following features:
+
+- They can be added and removed from a Helm installation without impacting the core Helm tool.
+
+- They can be written in any programming language.
+
+- They integrate with Helm, and will show up in helm help and other places.
+
+---
+class: center, middle
+
+Helm plugins live in `$HELM_PLUGINS` directory
+
+---
+class: center, middle
+
+The Helm plugin model is partially modeled on Git's plugin model.
+
+---
+class: center, middle
+
+Helm provides the user experience and top level processing logic, while the plugins do the "detail work" of performing a desired action.
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
