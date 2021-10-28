@@ -1416,6 +1416,43 @@ class: center, middle
 ---
 class: center, middle
 
+## Starter charts
+
+.content-credits[https://helm.sh/docs/topics/charts/#chart-starter-packs]
+
+---
+class: center, middle
+
+`helm create` command takes an optional `--starter` option that lets you specify a "starter chart"
+
+---
+class: center, middle
+
+located in `$XDG_DATA_HOME/helm/starters`
+
+---
+class: center, middle
+
+aka `$(helm env HELM_DATA_HOME)/starters`
+
+---
+class: center, middle
+
+As a chart developer, you may author charts that are specifically designed to be used as starters.
+
+---
+
+designed with the following considerations in mind:
+
+- The `Chart.yaml` will be overwritten by the generator.
+
+- Users will expect to modify such a chart's contents, so documentation should indicate how users can do so.
+
+- All occurrences of `<CHARTNAME>` will be replaced with the specified chart name so that starter charts can be used as templates.
+
+---
+class: center, middle
+
 ## Upgrading charts
 
 ---
@@ -1583,6 +1620,8 @@ displays all the resources which are created one by one and also related errors 
 class: center, middle
 
 ## Testing charts
+
+---
 
 ---
 class: center, middle
