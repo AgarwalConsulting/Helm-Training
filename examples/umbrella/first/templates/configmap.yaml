@@ -1,0 +1,29 @@
+{{define "test.first" }}
+class:
+  - Om Prakash
+  - Raghavender
+  - Johnny
+  - Ou
+{{ end }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: "{{ include "libchart.fullname" . }}-configmap-demo"
+  labels:
+    {{- include "libchart.labels" . | nindent 4 }}
+data:
+  name: {{ include "libchart.name" . }}
+  # chartName: {{/* template "libchart.test" . */}}
+  {{- include "test.first" . | nindent 2 }}
+  capitals: |
+    {{ .Files.Get "data/config1.toml" }}
+  templateFileName: {{ .Template.Name | base }}
+  templateDirName: {{ .Template.Name | dir }}
+  templateExt: {{ .Template.Name | ext }}
+  config:
+    {{- range $path, $_ :=  .Files.Glob  "data/config*" }}
+      {{ $path }}: |
+        {{- range $.Files.Lines $path }}
+          {{- . | nindent 8 }}
+        {{ end -}}
+    {{ end }}
