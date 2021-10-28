@@ -1453,6 +1453,11 @@ designed with the following considerations in mind:
 ---
 class: center, middle
 
+Currently the only way to add a chart to `$HELM_DATA_HOME/helm/starters` is to manually copy it there.
+
+---
+class: center, middle
+
 ## Upgrading charts
 
 ---
@@ -1575,6 +1580,12 @@ There are a few commands that can help you debug:
 - `helm get manifest`: This is a good way to see what templates are installed on the server.
 
 ---
+
+- If the linter encounters things that will cause the chart to fail installation, it will emit `[ERROR]` messages.
+
+- If it encounters issues that break with convention or recommendation, it will emit `[WARNING]` messages.
+
+---
 class: center, middle
 
 ### Installations
@@ -1621,7 +1632,69 @@ class: center, middle
 
 ## Testing charts
 
+.content-credits[https://helm.sh/docs/topics/chart_tests/]
+
 ---
+class: center, middle
+
+Let's look at an existing chart...
+
+---
+class: center, middle
+
+```bash
+helm pull bitnami/wordpress --untar --version 11.1.5
+```
+
+---
+class: center, middle
+
+A test in a helm chart lives under the `templates/` directory and is a job definition that specifies a container with a given command to run.
+
+---
+class: center, middle
+
+The container should exit successfully (exit 0) for a test to be considered a success.
+
+---
+class: center, middle
+
+The job definition must contain the helm test hook annotation: `helm.sh/hook: test`.
+
+---
+class: center, middle
+
+*Demo*: Defining our own simple test pod spec
+
+---
+
+Steps to Run a Test Suite on a Release
+
+- Install the chart on your cluster to create a release.
+
+- Run test using: `helm test <release-name>`
+
+---
+class: center, middle
+
+```bash
+helm install test-demo .
+
+helm test test-demo
+```
+
+---
+class: center, middle
+
+You may have to wait for all pods to become active; if you test immediately after this install, it is likely to show a transitive failure, and you will want to re-test.
+
+---
+
+- You can define as many tests as you would like in a single yaml file or spread across several yaml files in the `templates/` directory.
+
+- You are welcome to nest your test suite under a `tests/` directory like `<chart-name>/templates/tests/` for more isolation.
+
+- A test is a Helm hook, so annotations like `helm.sh/hook-weight` and `helm.sh/hook-delete-policy` may be used with test resources.
 
 ---
 class: center, middle
