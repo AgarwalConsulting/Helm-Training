@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "spring.deploymentLabel" . | printf "%s-%s" "pre-upgrade-2-job" }}
+  annotations:
+    helm.sh/hook: pre-upgrade
+    helm.sh/hook-weight: "-2000"
+    helm.sh/hook-delete-policy: hook-failed
+spec:
+  template:
+    metadata:
+      name: {{ include "spring.deploymentLabel" . | printf "%s-%s" "pre-upgrade-2" }}
+      labels:
+        app: hooks-demo
+    spec:
+      restartPolicy: Never
+      containers:
+        - image: alpine:latest
+          name: test-container
+          command:
+            - echo
+            - This should follow the previous one...$(date)

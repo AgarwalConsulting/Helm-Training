@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "spring.deploymentLabel" . | printf "%s-%s" "pre-upgrade" }}
+  labels:
+    app: hooks-demo
+  annotations:
+    helm.sh/hook: pre-upgrade
+    helm.sh/hook-weight: "-1000"
+spec:
+  restartPolicy: Never
+  containers:
+    - image: alpine:latest
+      name: test-container
+      command:
+        - echo
+        - Doing some pre-upgrade activity... $(date)
