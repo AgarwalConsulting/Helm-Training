@@ -1716,7 +1716,7 @@ You may have to wait for all pods to become active; if you test immediately afte
 ---
 class: center, middle
 
-*Exercise*: [Write a simple test pod for `spring-greeting`](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/06-simple-test.md)
+*Exercise*: [Write a simple test pod for `yaes-server`](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/06-simple-test.md)
 
 ---
 class: center, middle
