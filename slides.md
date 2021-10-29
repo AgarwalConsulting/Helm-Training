@@ -2053,7 +2053,7 @@ Use Secure chart repositories like: [Harbor](https://goharbor.io/) or [ChartMuse
 
 - Do **NOT** use *root* user
 
-- [seccomp profiles](https://docs.docker.com/engine/security/seccomp/)
+- Use seccomp profiles [for containers](https://docs.docker.com/engine/security/seccomp/) & [in pods](https://kubernetes.io/docs/tutorials/clusters/seccomp/)
 
 - [AppArmor] security profiles for Docker *(Not Applicable since K8s 1.21)*
 
