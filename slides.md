@@ -1955,9 +1955,15 @@ class: center, middle
 `jetstack/certmanager`
 
 ---
+
+## Best Practices
+
+.content-credits[https://helm.sh/docs/chart_best_practices/]
+
+---
 class: center, middle
 
-## Helm schema validation (`values.yaml`)
+### Helm schema validation (`values.yaml`)
 
 .content-credits[https://helm.sh/docs/topics/charts/#schema-files]
 
