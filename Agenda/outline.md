@@ -65,7 +65,8 @@
 
 - Advanced charts
   - Accessing Files
-  - Subcharts & global values
+  - Library & Subcharts
+  - Global values
   - Hands-on: Writing a more complex chart
 
 - Upgrading charts
@@ -79,18 +80,12 @@
 
 - Testing charts
   - Writing simple tests in `/template`
-  - Working with plugins
-  - Using `helm-unittest`
   - Hands-on: Testing your charts
 
 - Overview of helm plugins
+  - Working with plugins
 
-### Day 3 (4 hours)
-
-- Helm User Input Validation (Schema Validation)
-
-- What state variables helm provides ?
-  - Eg: State Variables during Rendering
+### Day 3 (8 hours)
 
 - Helm Hooks
   - What hooks are available?
@@ -99,13 +94,17 @@
 - Helm charts in practice
   - What to look for during upgrades and rollbacks (And how to manage using helm hooks)?
     - Limitations and alternatives
-  - Chart Design Patterns
+  - Chart Design Patterns (with example community charts)
+
+- Helm User Input Validation (Schema Validation)
 
 - Writing secure charts
   - RBAC/ServiceAccounts
   - Securing your helm repository
   - Container security
   - Validating your charts
+
+- Final Project: Packaging a micro-services based application
 
 ---
 

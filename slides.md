@@ -1679,11 +1679,6 @@ class: center, middle
 *Demo*: Defining our own simple test pod spec
 
 ---
-class: center, middle
-
-`restartPolicy: Never`
-
----
 
 Steps to Run a Test Suite on a Release
 
@@ -1699,6 +1694,11 @@ helm install test-demo .
 
 helm test test-demo
 ```
+
+---
+class: center, middle
+
+`restartPolicy: Never`
 
 ---
 class: center, middle
@@ -1932,11 +1932,6 @@ class: center, middle
 ---
 class: center, middle
 
-### Limitations & alternatives
-
----
-class: center, middle
-
 ### Chart design patterns
 
 ---
@@ -1953,6 +1948,16 @@ class: center, middle
 class: center, middle
 
 `jetstack/certmanager`
+
+---
+class: center, middle
+
+`prometheus-operator`
+
+---
+class: center, middle
+
+### Limitations & alternatives
 
 ---
 class: center, middle
