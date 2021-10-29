@@ -1,0 +1,31 @@
+{{- define "spring.deploymentLabel" -}}
+{{.Release.Name}}-spring-server-deployment
+{{ end }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ include "spring.deploymentLabel" . }}
+  name: {{ include "spring.deploymentLabel" . }}
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: {{ include "spring.deploymentLabel" . }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ include "spring.deploymentLabel" . }}
+    spec:
+      initContainers:
+      containers:
+        - image: {{.Values.image.repository}}:{{ default "latest" .Values.image.tag }}
+          name: {{.Release.Name}}-spring-server
+          ports:
+          - name: http-server
+            containerPort: 8080
+          resources: {}
+          livenessProbes:
+          readinessProbes:
