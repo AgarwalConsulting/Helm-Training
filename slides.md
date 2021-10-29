@@ -1876,6 +1876,31 @@ There is no way for a top-level chart to disable the hooks declared by subcharts
 ---
 class: center, middle
 
+It is possible to define a weight for a hook which will help build a deterministic executing order.
+
+---
+class: center, middle
+
+Weights are defined using the following annotation:
+
+```yaml
+annotations:
+  "helm.sh/hook-weight": "5"
+```
+
+---
+class: center, middle
+
+Hook weights can be positive or negative numbers but must be represented as strings.
+
+---
+class: center, middle
+
+When Helm starts the execution cycle of hooks of a particular Kind it will sort those hooks in ascending order.
+
+---
+class: center, middle
+
 ### Hook deletion policy
 
 ---
