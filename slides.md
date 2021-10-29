@@ -1679,6 +1679,11 @@ class: center, middle
 *Demo*: Defining our own simple test pod spec
 
 ---
+class: center, middle
+
+`restartPolicy: Never`
+
+---
 
 Steps to Run a Test Suite on a Release
 
@@ -1786,17 +1791,12 @@ class: center, middle
 ---
 class: center, middle
 
-### Using [helm-unittest](https://github.com/quintush/helm-unittest)
+### Looking at [helm-unittest](https://github.com/quintush/helm-unittest)
 
 ---
 class: center, middle
 
 BDD styled unit test framework for Kubernetes Helm charts as a Helm plugin.
-
----
-class: center, middle
-
-*Demo*: Using helm-unittest to define test cases
 
 ---
 class: center, middle
@@ -1809,6 +1809,95 @@ class: center, middle
 ## Helm Hooks
 
 .content-credits[https://helm.sh/docs/topics/charts_hooks/]
+
+---
+class: center, middle
+
+Helm provides a hook mechanism to allow chart developers to intervene at certain points in a release's life cycle.
+
+---
+
+Hooks can be used to:
+
+- Load a ConfigMap or Secret during install before any other charts are loaded.
+
+- Execute a Job to back up a database before installing a new chart, and then execute a second job after the upgrade in order to restore data.
+
+- Run a Job before deleting a release to gracefully take a service out of rotation before removing it.
+
+---
+class: center, middle
+
+Specified using the annotation: `helm.sh/hook:`
+
+---
+class: center, middle
+
+### Available Hooks
+
+---
+class: center, middle
+
+`test`: Executes when the Helm test subcommand is invoked
+
+---
+
+- `pre-install`: Executes after templates are rendered, but before any resources are created in Kubernetes
+
+- `post-install`: Executes after all resources are loaded into Kubernetes
+
+- `pre-delete`: Executes on a deletion request before any resources are deleted from Kubernetes
+
+- `post-delete`: Executes on a deletion request after all of the release's resources have been deleted
+
+- `pre-upgrade`: Executes on an upgrade request after templates are rendered, but before any resources are - updated
+
+- `post-upgrade`: Executes on an upgrade request after all resources have been upgraded
+
+- `pre-rollback`: Executes on a rollback request after templates are rendered, but before any resources are rolled back
+
+- `post-rollback`: Executes on a rollback request after all resources have been modified
+
+---
+class: center, middle
+
+Hooks allow you, the chart developer, an opportunity to perform operations at strategic points in a release lifecycle.
+
+---
+class: center, middle
+
+When subcharts declare hooks, those are also evaluated.
+
+---
+class: center, middle
+
+There is no way for a top-level chart to disable the hooks declared by subcharts.
+
+---
+class: center, middle
+
+### Hook deletion policy
+
+---
+class: center, middle
+
+It is possible to define policies that determine when to delete corresponding hook resources.
+
+---
+class: center, middle
+
+```yaml
+annotations:
+  "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+```
+
+---
+
+- `before-hook-creation`: Delete the previous resource before a new hook is launched *(default)*
+
+- `hook-succeeded`: Delete the resource after the hook is successfully executed
+
+- `hook-failed`: Delete the resource if the hook failed during execution
 
 ---
 class: center, middle
