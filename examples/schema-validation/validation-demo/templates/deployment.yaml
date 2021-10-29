@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-deployment
+  name: "{{ .Release.Name }}-spring-deployment"
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: spring-deployment
+  template:
+    metadata:
+      labels:
+        app: spring-deployment
+    spec:
+      containers:
+      - image: {{ default "latest" .Values.image.tag | printf "%s:%s" .Values.image.repository }}
+        name: spring-greeting
+        resources: {}

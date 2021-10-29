@@ -1955,6 +1955,7 @@ class: center, middle
 `jetstack/certmanager`
 
 ---
+class: center, middle
 
 ## Best Practices
 

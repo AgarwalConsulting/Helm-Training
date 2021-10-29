@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Values",
+  "type": "object",
+  "required": [
+    "image"
+  ],
+  "properties": {
+    "replicaCount": {
+      "type": "integer"
+    },
+    "image": {
+      "type": "object",
+      "required": [ "repository", "tag" ],
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "pullPolicy": {
+          "type": "string",
+          "enum": ["IfNotPresent", "Always"]
+        },
+        "tag": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
