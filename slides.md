@@ -1902,6 +1902,144 @@ annotations:
 ---
 class: center, middle
 
+## Helm charts in practice
+
+---
+class: center, middle
+
+### Limitations & alternatives
+
+---
+class: center, middle
+
+### Chart design patterns
+
+---
+class: center, middle
+
+Looking at some popular charts...
+
+---
+class: center, middle
+
+`bitnami/airflow`
+
+---
+class: center, middle
+
+`jetstack/certmanager`
+
+---
+class: center, middle
+
+## Helm schema validation (`values.yaml`)
+
+.content-credits[https://helm.sh/docs/topics/charts/#schema-files]
+
+---
+class: center, middle
+
+Helm 3 introduced support for validation of values using schema files
+
+---
+class: center, middle
+
+This can be done by defining a schema in the `values.schema.json` file
+
+.content-credits[https://austindewey.com/2020/06/13/helm-tricks-input-validation-with-values-schema-json/]
+
+---
+class: center, middle
+
+Defining a JSON schema...
+
+.content-credits[https://json-schema.org/learn/getting-started-step-by-step]
+
+---
+class: center, middle
+
+The `required` field is used to fail chart rendering if specific values are not provided.
+
+---
+
+```json
+"required": [
+  "image",
+  ...
+],
+```
+
+---
+class: center, middle
+
+This schema will be applied to the values to validate it.
+
+---
+
+Validation occurs when any of the following commands are invoked:
+
+- `helm install`
+
+- `helm upgrade`
+
+- `helm lint`
+
+- `helm template`
+
+---
+
+Guidelines for developers regarding usage of schema files:
+
+- If you are adding a new entry to or modifying an existing entry in the `values.yaml` file of a subchart, you must update the respective `values.schema.json` file to match this change.
+
+- All settings configurable via `values.yaml` must have type validations (ensure they accept only the correct data types as values) implemented in the `values.schema.json` file.
+
+- Validation of required fields can be limited to ensuring the settings a user has defined in their `values.yaml` file is sufficient to spin up a pod with just that component, and without any error being reported in the logs.
+
+---
+class: center, middle
+
+## Securing charts
+
+---
+
+- [Provenance files](https://helm.sh/docs/topics/provenance/)
+
+- Secure chart repositories
+
+- RBAC / ServiceAccounts
+
+- Container Security
+
+---
+class: center, middle
+
+Use Secure chart repositories like: [Harbor](https://goharbor.io/) or [ChartMuseum](https://chartmuseum.com/)
+
+---
+
+- Role-based access control (RBAC) is a method of regulating access to computer or network resources based on the roles of individual users within your organization. [1](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+
+- Processes in containers inside pods can also contact the apiserver. When they do, they are authenticated as a particular Service Account. [2](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/)
+
+---
+
+### Container Security
+
+- Do **NOT** use *root* user
+
+- [seccomp profiles](https://docs.docker.com/engine/security/seccomp/)
+
+- [AppArmor] security profiles for Docker *(Not Applicable since K8s 1.21)*
+
+---
+class: center, middle
+
+*Final Exercise*: Package [`rvstore` application](https://github.com/AgarwalConsulting/rvstore/blob/master/services.md) as a helm chart
+
+---
+class: center, middle
+
 Code
 https://github.com/AgarwalConsulting/Helm-Training
 
