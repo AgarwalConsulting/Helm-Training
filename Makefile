@@ -37,5 +37,5 @@ k8s-kind-delete:
 k8s-helm-workaround:
 	mkdir -p ~/.kube-helm-workaround
 	kubectl config view --raw > ~/.kube-helm-workaround/kube.yaml
-	echo 'export KUBECONFIG="$HOME/.kube-helm-workaround/kube.yaml"' >> .bash_profile
-	echo 'export KUBECONFIG="$HOME/.kube-helm-workaround/kube.yaml"' >> .bashrc
+	echo 'export KUBECONFIG="$HOME/.kube-helm-workaround/kube.yaml"' >> ~/.bash_profile
+	echo 'export KUBECONFIG="$HOME/.kube-helm-workaround/kube.yaml"' >> ~/.bashrc
