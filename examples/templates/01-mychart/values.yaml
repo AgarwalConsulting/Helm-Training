@@ -1,0 +1,25 @@
+favorite:
+  food: Dosa
+  drink: tea
+
+map:
+  one: 1
+  two: 2
+  three: 3
+
+sequence:
+  - one
+  - two
+  - three
+
+coffee: |
+  Latte
+  Cappuccino
+  Espresso
+
+age: !!str 21
+port: !!int "80"
+
+"coffees": [
+  "Latte", "Cappuccino", "Espresso"
+]

@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mychart.fullname" . }}
+data:
+  ReleaseName: {{ .Release.Name }}
+  IsInstall: {{ .Release.IsInstall | quote }}
+  ReplicaCount: {{ .Values.replicaCount | quote }}
+  Chart: {{ .Chart.Version | quote }}
+  K8Version: {{ .Capabilities.KubeVersion }}
+  TemplatePath: {{ .Template.BasePath }}
+  TemplateName: {{ .Template.Name }}
+  UUID: {{ uuidv4 }}
+  Pods: {{ lookup "v1" "Pod" "default" "curl" }}
+  MyNotes: >
+{{ .Files.Get "mynotes.txt" | indent 4 }}
+  {{ with .Values.favorite }}
+  FavoriteFood: {{ .food | upper | quote }}
+  FavoriteDrink: {{ .drink | default "Haldi Latte" }}
+
+  {{ if eq .drink "tea" }}
+  cup: "true"
+  {{- end -}}
+  {{ end }}
+  {{ range $idx, $val := .Values.sequence }}
+  {{$val}}: {{$idx | quote}}
+  {{ end }}
+{{ (.Files.Glob "capitals/*").AsConfig | indent 2 }}
