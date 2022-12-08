@@ -36,7 +36,13 @@ Optionally set the tag as well.
 helm install <release-name> ./
 ```
 
-## Step 8: Make sure the pod(s) are created
+## Step 8: Make sure release is deployed & the pod(s) are created
+
+```bash
+helm list
+
+kubectl get pods
+```
 
 ## Step 9 (Optional): Apply a custom configuration
 
