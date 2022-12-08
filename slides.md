@@ -370,7 +370,7 @@ class: center, middle
 ---
 class: center, middle
 
-*Exercise*: Installing and upgrading charts using `helm` cli
+*Exercise*: [Installing and upgrading charts using `helm` cli](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/01-install-and-configure-a-chart.md)
 
 ---
 

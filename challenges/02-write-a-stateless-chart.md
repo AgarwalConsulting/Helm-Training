@@ -42,7 +42,11 @@ helm install <release-name> ./
 helm list
 
 kubectl get pods
+
+kubectl describe pod <pod-name>
 ```
+
+Make sure the pod is using image: `agarwalconsulting/spring-greeting`
 
 ## Step 9 (Optional): Apply a custom configuration
 
