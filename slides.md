@@ -554,7 +554,7 @@ annotations:
 ---
 class: center, middle
 
-*Exercise*: Writing a *stateless* chart
+*Exercise*: [Writing a *stateless* chart](https://github.com/AgarwalConsulting/Helm-Training/blob/master/challenges/02-write-a-stateless-chart.md)
 
 ---
 class: center, middle
