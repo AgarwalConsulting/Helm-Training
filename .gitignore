@@ -24,3 +24,5 @@ live-examples/
 **/charts/*.tgz
 
 # End of https://www.toptal.com/developers/gitignore/api/helm
+
+examples/first-plugin/helm-hello/greet

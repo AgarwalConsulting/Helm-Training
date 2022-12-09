@@ -1,0 +1,9 @@
+name: "hello"
+version: "0.1.0"
+usage: "helm hello <--name>"
+description: "prints hello world"
+ignoreFlags: false
+command: "$HELM_PLUGIN_DIR/greet $@"
+# hooks:
+#   install: "cd $HELM_PLUGIN_DIR"
+#   update: "cd $HELM_PLUGIN_DIR; HELM_PLUGIN_UPDATE=1 ./install-binary.sh"
